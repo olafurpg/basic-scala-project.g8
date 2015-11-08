@@ -2,13 +2,19 @@ name := "$name$"
 
 organization := "$organization$"
 
-version := "$version$"
+lazy val root = project.in(file("."))
+  .aggregate($name$JS, $name$JVM)
 
-scalaVersion := "$scalaVersion$"
+lazy val $name$ = crossProject.in(file("."))
+  .settings(
+    name := "$name$",
+    version := "$version",
+    scalaVersion := "$scalaVersion$",
+  ).jvmSettings(
+    // Add JVM-specific settings here
+  ).jsSettings(
+    // Add JS-specific settings here
+  )
 
-libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.1" % "test" withSources() withJavadoc()
-)
-
-initialCommands := "import $organization$.$name;format="lower,word"$._"
-
+lazy val $name$JVM = $name$.jvm
+lazy val $name$JS = $name$.js
