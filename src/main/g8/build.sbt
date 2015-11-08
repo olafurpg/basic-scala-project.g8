@@ -8,12 +8,15 @@ lazy val root = project.in(file("."))
 lazy val $name$ = crossProject.in(file("."))
   .settings(
     name := "$name$",
-    version := "$version",
+    version := "$version$",
     scalaVersion := "$scalaVersion$",
+    testFrameworks += new TestFramework("utest.runner.Framework"),
+    libraryDependencies ++= Seq(
+        "com.lihaoyi" %%% "utest" % "0.3.0" % "test",
+        "org.scalatest" %%% "scalatest" % "3.0.0-SNAP5"
+    )
   ).jvmSettings(
-    // Add JVM-specific settings here
   ).jsSettings(
-    // Add JS-specific settings here
   )
 
 lazy val $name$JVM = $name$.jvm
